@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "papers-visualization"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "papers_visualization"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+matplotlib = "^3.7.1"
+seaborn = "^0.12.2"
+pandas = "^2.0.2"
+numpy = "^1.24.3"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.23.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
