@@ -3,3 +3,5 @@ pandas==2.0.2
 seaborn==0.12.2
 matplotlib==3.7.1
 requests==2.31.0
+sciki-learn==1.2.2
+torch==2.0.1
