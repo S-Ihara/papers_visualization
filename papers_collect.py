@@ -7,7 +7,8 @@ def main(args):
         args argparse.Namespace: Configs
     """
     if args.conf == 'cvpr':
-        collecter = cvpr.CVPR_papers_collecter(year=args.year, data_path=args.data_path)
+        year = int(args.year)
+        collecter = cvpr.CVPR_papers_collecter(year=year, data_path=args.data_path)
     else:
         raise NotImplementedError
 
@@ -18,6 +19,6 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--conf', default='cvpr')
     argparser.add_argument('--year', default='2023')
-    argparser.add_argument('--data_path', default='./papers_info'')
+    argparser.add_argument('--data_path', default='./papers_info')
     args = argparser.parse_args()
     main(args)

@@ -1,3 +1,4 @@
 .DS_Store
 /papers_info
 #sandbox.ipynb
+__pycache__
