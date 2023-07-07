@@ -1,5 +1,5 @@
 import argparse
-from papers_collect import cvpr
+from src import cvpr
 
 def main(args):
     """main function
@@ -13,7 +13,7 @@ def main(args):
         raise NotImplementedError
 
     collecter.collect()
-    collecter.save_pickle()
+    collecter.save_pickles(save_path=args.data_path)
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()

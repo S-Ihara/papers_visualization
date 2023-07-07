@@ -1,4 +1,6 @@
 .DS_Store
-/papers_info
-#sandbox.ipynb
+papers_info/
+sandbox/
 __pycache__
+papers_visualization/ # venv
+results/

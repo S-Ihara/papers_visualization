@@ -7,6 +7,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 class CVPR_papers_collecter:
+    """Collect papers info from CVPR
+    Note:
+        Only 2021 ~ 2023 are supported
+    """
     def __init__(self,year=2023 ,data_path=Path("./papers_info")):
         """
         Args:
@@ -38,10 +42,8 @@ class CVPR_papers_collecter:
         )
         self.driver.get(self.conference_url)
     
-    def collect(self,verbose=True):
-        """
-        Args:
-            verbose bool: if True, print progress
+    def collect(self):
+        """Collect papers info
         """
         if 2020 < self.year <= 2023:
             title_element_list = self.driver.find_elements(By.CLASS_NAME, 'ptitle')
@@ -67,7 +69,7 @@ class CVPR_papers_collecter:
             raise NotImplementedError
     
     def save_pickles(self,mask_length=200,save_path=None):
-        """
+        """Save papers info as pickle
         Args:
             mask_length int: if abstract length is below this value, remove the paper
             save_path Union[pathlib.Path,str]: path to save papers info
