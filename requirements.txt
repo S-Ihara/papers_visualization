@@ -7,3 +7,4 @@ torch
 tqdm
 umap-learn
 selenium
+ipykernel

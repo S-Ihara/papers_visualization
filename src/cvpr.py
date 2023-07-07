@@ -68,7 +68,7 @@ class CVPR_papers_collecter:
         else:
             raise NotImplementedError
     
-    def save_pickles(self,mask_length=200,save_path=None):
+    def save_pickles(self,mask_length=200,save_path):
         """Save papers info as pickle
         Args:
             mask_length int: if abstract length is below this value, remove the paper

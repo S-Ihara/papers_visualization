@@ -1,3 +1,4 @@
+import os
 import glob
 from pathlib import Path
 
@@ -140,6 +141,9 @@ def papers_visualize(papers, papers_embedding, keywords, save_path=None, title="
 
     if isinstance(save_path, str):
         save_path = Path(save_path)
+    if not save_path.exists():
+        save_path.mkdir(parents=True)
+
     plt.savefig(save_path / (title+".png"), bbox_inches='tight', pad_inches=0.1)
 
 
@@ -149,6 +153,7 @@ if __name__ == "__main__":
 
     papers = papers_load(data_path, conf="all", year="all")
     keywords = keyword_extract(papers)
+    print(f"number of papers: {len(papers)}")
     print("keywords are")
     print(keywords)
     title_and_abstract = [paper.title + ' ' + paper.abstract for idx, paper in papers.iterrows()]

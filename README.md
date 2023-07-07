@@ -7,8 +7,15 @@
 一応pyproject.toml作ったけど動くか確認してないです  
 ## Usage
 - step.1 papers_collect.pyで論文情報をダウンロードする
+    ```bash
+    python papers_collect.py --conf cvpr --year 2023
+    ```
 - step.2 visualize_notebookかpapers_visualize.pyで可視化させる
+    ```bash
+    python papers_visualize.py
+    ```
 
 ## ダウンロードできる国際会議論文
-- cvpr  
+- cvpr (2023-2021)  
+
 そのうち増やす
