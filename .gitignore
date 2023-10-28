@@ -2,5 +2,5 @@
 papers_info/
 sandbox/
 __pycache__
-papers_visualization/ # venv
+papers_visualization/
 results/

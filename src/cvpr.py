@@ -28,8 +28,10 @@ class CVPR_papers_collecter:
             os.makedirs(self.data_path)
         
         self.year = year
-        if not (2020 < year <= 2023):
+        if not (2012 < year <= 2023):
             raise NotImplementedError
+        if 2012 < year <= 2020:
+            self.conference_url = f"https://openaccess.thecvf.com/CVPR{year}"
         
         #chromedriver_path = '/usr/bin/chromedriver'
         options = webdriver.ChromeOptions()
@@ -64,11 +66,38 @@ class CVPR_papers_collecter:
                 self.titles.append(title)
                 self.abstracts.append(abst)
             print(f"{len(self.titles)} papers are collected")
+        elif 2012 < self.year <= 2020:
+            # id="content"の中の要素を取得
+            content_element = self.driver.find_element(By.ID, 'content')
 
+            # content_elementの中のaタグを取得
+            a_element_list = content_element.find_elements(By.TAG_NAME, 'a')
+            a_href_list = [a_element.get_attribute('href') for a_element in a_element_list]
+            for a_href in a_href_list:
+                self.driver.get(a_href)
+
+                title_element_list = self.driver.find_elements(By.CLASS_NAME, 'ptitle')
+                paper_links = []
+
+                for element in tqdm(title_element_list):
+                    paper_links.append(element.find_element(By.TAG_NAME, 'a').get_attribute('href'))
+                print(f"{len(paper_links)} papers are found")
+
+                for i,element in enumerate(tqdm(title_element_list)):
+                    self.driver.get(paper_links[i])
+                    # if Not Found page is shown, skip
+                    if self.driver.find_element(By.TAG_NAME, 'body').text[:9] == 'Not Found':
+                        continue
+
+                    title = self.driver.find_element(By.ID, 'papertitle').text
+                    abst = self.driver.find_element(By.ID, 'abstract').text
+                    self.titles.append(title)
+                    self.abstracts.append(abst)
+            print(f"{len(self.titles)} papers are collected")
         else:
             raise NotImplementedError
     
-    def save_pickles(self,mask_length=200,save_path):
+    def save_pickles(self,save_path,mask_length=200):
         """Save papers info as pickle
         Args:
             mask_length int: if abstract length is below this value, remove the paper
@@ -80,6 +109,8 @@ class CVPR_papers_collecter:
             'abstract': self.abstracts,
             'conference': "cvpr",
         })
+        assert len(self.titles) != 0, "self.titles is empty. Please run collect() first."
+
 
         mask = np.array([len(a) >= 200 for a in cvpr.abstract])
         cvpr = cvpr[mask].reset_index(drop=True)
