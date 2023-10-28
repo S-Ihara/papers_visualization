@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 class CVPR_papers_collecter:
     """Collect papers info from CVPR
     Note:
-        Only 2021 ~ 2023 are supported
+       2013 ~ 2023 are supported
     """
     def __init__(self,year=2023 ,data_path=Path("./papers_info")):
         """
