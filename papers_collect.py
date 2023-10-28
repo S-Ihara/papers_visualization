@@ -1,5 +1,5 @@
 import argparse
-from src import cvpr, iclr
+from src import cvpr, iclr, iccv
 
 def main(args):
     """main function
@@ -12,6 +12,9 @@ def main(args):
     elif args.conf == 'iclr':
         year = int(args.year)
         collecter = iclr.ICLR_papers_collecter(year=year, data_path=args.data_path)
+    elif args.conf == "iccv":
+        year = int(args.year)
+        collecter = iccv.ICCV_papers_collecter(year=year, data_path=args.data_path)
     else:
         raise NotImplementedError
 
